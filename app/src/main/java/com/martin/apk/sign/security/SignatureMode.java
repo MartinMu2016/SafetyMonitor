@@ -1,4 +1,4 @@
-package com.martin.apk.sign;
+package com.martin.apk.sign.security;
 
 /**
  * <p>
@@ -16,7 +16,7 @@ package com.martin.apk.sign;
  * @Modification Time:2018/11/23 11:06 AM
  */
 public  enum SignatureMode {
-    SHA1(0), MD5(1);
+    SHA1(0), MD5(1),CRC(2);
 
     int value;
 

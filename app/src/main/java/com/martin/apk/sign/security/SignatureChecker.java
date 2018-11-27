@@ -1,10 +1,12 @@
-package com.martin.apk.sign;
+package com.martin.apk.sign.security;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Log;
+
+import com.martin.apk.sign.util.EncryptUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -29,14 +31,14 @@ import java.security.cert.X509Certificate;
  * @Reviser:
  * @Modification Time:2018/11/23 10:49 AM
  */
-public class SignatureValidator {
+public class SignatureChecker {
     private Context context;
     private String cer = null;
     private String realCer = null;//传入的签名
     private static final String TAG = "SignCheck";
  
 
-    public SignatureValidator(Context context, String realCer) {
+    public SignatureChecker(Context context, String realCer) {
         this.context = context;
         this.realCer = realCer;
     }

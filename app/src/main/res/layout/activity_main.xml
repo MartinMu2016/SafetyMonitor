@@ -19,10 +19,16 @@
             android:text="MD5验证" />
 
         <RadioButton
-            android:id="@+id/rb_sha1"
+        android:id="@+id/rb_sha1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SHA1验证" />
+
+        <RadioButton
+            android:id="@+id/rb_crc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SHA1验证" />
+            android:text="CRC验证" />
     </RadioGroup>
 
     <LinearLayout

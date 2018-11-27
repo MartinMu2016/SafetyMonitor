@@ -2,10 +2,10 @@
 <resources>
 
     <!--keystore MD5 -->
-    <!-- 6B:A9:D3:6B:C9:33:59:0B:2E:B3:51:67:E3:8F:BD:8D:11 -->
     <string name="certificate_md5">84fa61d00a3903018b9a7d802c0139c9</string>
     <!--keystore sha1 -->
-    <!--7D:F4:B0:8C:13:31:70:83:B0:6A:51:AE:5C:63:FE:66:BB:2E:AD:3C-->
     <string name="certificate_sha1">1f3182f8b415125feb345e98e7b3a331</string>
+    <!--classesdex crc 954057899-->
+    <string name="classesdex_crc">954057891</string>
 
 </resources>
