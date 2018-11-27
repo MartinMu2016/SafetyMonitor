@@ -1,4 +1,4 @@
-package com.martin.apk.sign.security;
+package com.martin.apk.safety.security;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Log;
 
-import com.martin.apk.sign.util.EncryptUtil;
+import com.martin.apk.safety.util.EncryptUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

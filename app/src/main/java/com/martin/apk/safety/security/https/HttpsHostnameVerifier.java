@@ -1,4 +1,4 @@
-package com.martin.apk.sign.security.https;
+package com.martin.apk.safety.security.https;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;

@@ -1,4 +1,4 @@
-package com.martin.apk.sign.activity;
+package com.martin.apk.safety.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -6,21 +6,39 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.martin.apk.sign.R;
-import com.martin.apk.sign.security.SafetyMonitor;
-import com.martin.apk.sign.security.SignatureMode;
+import com.martin.apk.safety.AppConfig;
+import com.martin.apk.safety.R;
+import com.martin.apk.safety.security.SafetyMonitor;
+import com.martin.apk.safety.security.SignatureChecker;
+import com.martin.apk.safety.security.SignatureMode;
+import com.martin.apk.safety.util.Utils;
 
-import static com.martin.apk.sign.security.SignatureMode.CRC;
-import static com.martin.apk.sign.security.SignatureMode.MD5;
-import static com.martin.apk.sign.security.SignatureMode.SHA1;
+import static com.martin.apk.safety.security.SignatureMode.CRC;
+import static com.martin.apk.safety.security.SignatureMode.MD5;
+import static com.martin.apk.safety.security.SignatureMode.SHA1;
 
-
+/**
+ * <p>
+ * Package Name:com.martin.apk.safety.activity
+ * </p>
+ * <p>
+ * Class Name:MainActivity
+ * <p>
+ * Description:Main entrance
+ * </p>
+ *
+ * @Author Martin
+ * @Version 1.0 2018/11/27 4:21 PM Release
+ * @Reviser:
+ * @Modification Time:2018/11/27 4:21 PM
+ */
 public class MainActivity extends AppCompatActivity {
     TextView signaturText;
     RadioGroup radioGroup;
@@ -31,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Utils.init(this.getApplication());
         this.safetyMonitor = new SafetyMonitor();
         this.radioGroup = findViewById(R.id.radiogroup);
         this.signaturText = findViewById(R.id.signaturText);
@@ -77,48 +96,56 @@ public class MainActivity extends AppCompatActivity {
         if (SafetyMonitor.classesDexCheck(this)) {
             showToast("ok");
         } else {
-            showDialog();
+            SafetyMonitor.showDialog();
         }
     }
 
     /**
      * 验证SHA1
-     */
+     * <p>
+     *     if (SafetyMonitor.checkSHA1(this, sha1)) {
+     *                  showToast("ok");
+     *              } else {
+     *                  showDialog();
+     *              }
+     * </p>
+     **/
     public void checkSHA1(String sha1) {
-        if (SafetyMonitor.checkSHA1(this, sha1)) {
-            showToast("ok");
-        } else {
-            showDialog();
-        }
-/*        SignatureChecker signatureChecker = new SignatureChecker(this, sha1);
+        SignatureChecker signatureChecker = new SignatureChecker(this, sha1);
         if (signatureChecker.checkSHA1()) {
             showToast("ok");
         } else {
-            showDialog();
+            SafetyMonitor.showDialog();
         }
         String signature_sha1 = signatureChecker.getCertificateSHA1Fingerprint();
         signaturText.setText("SHA1:\t" + signature_sha1);
-        Log.d(AppConfig.TAG, signature_sha1);*/
+        Log.d(AppConfig.TAG, signature_sha1);
+
     }
 
     /**
-     * 验证MD5
+     * 验证MD
+     *
+     * <p>
+     *     if (SafetyMonitor.checkMD5(this, md5)) {
+     *             showToast("ok");
+     *         } else {
+     *             showDialog();
+     *         }
+     *
+     * </p>
+     *
      */
     public void checkMD5(String md5) {
-        if (SafetyMonitor.checkMD5(this, md5)) {
-            showToast("ok");
-        } else {
-            showDialog();
-        }
-        /*SignatureChecker signatureChecker = new SignatureChecker(this, md5);
+        SignatureChecker signatureChecker = new SignatureChecker(this, md5);
         if (signatureChecker.checkMD5()) {
             showToast("ok");
         } else {
-            showDialog();
+            SafetyMonitor.showDialog();
         }
         String signature_md5 = signatureChecker.getCertificateMD5Fingerprint();
         signaturText.setText("MD5:\t" + signature_md5);
-        Log.d(AppConfig.TAG, signature_md5);*/
+        Log.d(AppConfig.TAG, signature_md5);
     }
 
     /**
@@ -129,40 +156,6 @@ public class MainActivity extends AppCompatActivity {
     public void showToast(String str) {
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }
-
-
-    public void showDialog() {
-        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("警告")
-                                                          .setMessage("请前往官方渠道下载正版 app， http://.....")
-                                                          .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                                              @SuppressLint("MissingPermission")
-                                                              @Override
-                                                              public void onClick(DialogInterface dialog, int which) {
-                                                                  ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-                                                                  manager.killBackgroundProcesses(getPackageName());
-                                                              }
-                                                          })
-                                                          .create();
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-                    return true;
-                } else {
-                    return false; //默认返回 false
-                }
-            }
-        });
-        dialog.show();
-    }
-
-    //1f3182f8b415125feb345e98e7b3a331
-    //1f3182f8b415125feb345e98e7b3a331
-    //1f3182f8b415125feb345e98e7b3a331
-
-
 
 
 }

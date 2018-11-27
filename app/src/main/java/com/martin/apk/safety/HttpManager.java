@@ -1,12 +1,7 @@
-package com.martin.apk.sign;
+package com.martin.apk.safety;
 
-import android.os.Handler;
-import android.os.Looper;
-
-import com.martin.apk.sign.security.https.HttpsConfig;
-import com.martin.apk.sign.security.https.HttpsHostnameVerifier;
-
-import java.util.concurrent.TimeUnit;
+import com.martin.apk.safety.security.https.HttpsConfig;
+import com.martin.apk.safety.security.https.HttpsHostnameVerifier;
 
 import okhttp3.OkHttpClient;
 

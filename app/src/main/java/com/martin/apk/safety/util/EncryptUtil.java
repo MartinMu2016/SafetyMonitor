@@ -1,4 +1,4 @@
-package com.martin.apk.sign.util;
+package com.martin.apk.safety.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

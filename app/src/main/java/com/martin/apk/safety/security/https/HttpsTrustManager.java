@@ -1,6 +1,7 @@
-package com.martin.apk.sign.security.https;
+package com.martin.apk.safety.security.https;
 
-import com.moor.im_ctcc.common.utils.Utils;
+
+import com.martin.apk.safety.util.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
